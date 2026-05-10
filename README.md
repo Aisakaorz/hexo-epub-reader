@@ -53,6 +53,16 @@ scripts/tags/
 </div>
 ```
 
+### Preview
+
+**Volume Cards：**
+
+![EPUB Cards](preview/epub-cards.webp)
+
+**Reader Interface：**
+
+![EPUB Reader](preview/epub-reader.webp)
+
 ### Parameters
 
 | Param | Required | Description |
@@ -90,6 +100,16 @@ content 2
 
 {% endtxt_reader %}
 ```
+
+### Preview
+
+**Chapter Cards：**
+
+![TXT Chapter Cards](preview/txt-cards.webp)
+
+**Reader View：**
+
+![TXT Reader](preview/txt-reader.webp)
 
 ### How it works
 
