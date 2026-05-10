@@ -1,6 +1,8 @@
 # hexo-epub-reader
 A Hexo tag plugin for inline EPUB cards with browser-based reading and download fallback.
 
+*(Current release: UI in Simplified Chinese — edit `epub.js` directly for English or other languages.)*
+
 ## Features
 
 - `{% epub %}` tag for per-volume cards (cover, title, release date, volume badge)
