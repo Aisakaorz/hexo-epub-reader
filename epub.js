@@ -65,7 +65,7 @@ hexo.extend.tag.register('epub', function(args) {
     ${dateLine}
     <div class="epub-actions">
       <button class="epub-btn read" onclick="HexoEpub.open('${id}')">📖 阅读</button>
-      <a class="epub-btn download" href="${pathUrl}" download>⬇️ EPUB</a>
+      <a class="epub-btn download" href="${pathUrl}" download>⬇️ 下载</a>
     </div>
   </div>
 </div>
