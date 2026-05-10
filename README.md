@@ -1,11 +1,11 @@
 # hexo-epub-reader
 A Hexo tag plugin for inline EPUB cards with browser-based reading and download fallback.
 
-*(Current release: UI in Simplified Chinese — edit `epub.js` directly for English or other languages.)*
+*(Current release: UI in Simplified Chinese — edit `epub-reader.js` directly for English or other languages.)*
 
 ## Features
 
-- `{% epub %}` tag for per-volume cards (cover, title, release date, volume badge)
+- `{% epub_reader %}` tag for per-volume cards (cover, title, release date, volume badge)
 - Browser-based EPUB reading via epub.js + JSZip
 - Auto path resolution for `post_asset_folder` + `abbrlink`
 - Chinese filename support, image blob fallback, Sony `res://` font override
@@ -14,11 +14,11 @@ A Hexo tag plugin for inline EPUB cards with browser-based reading and download 
 
 ## Install
 
-Copy `epub.js` to your Hexo theme's `scripts/tags/` directory.
+Copy `epub-reader.js` to your Hexo theme's `scripts/tags/` directory.
 
-For example, with the **NexT** theme: `themes/next/scripts/tags/epub.js`
+For example, with the **NexT** theme: `themes/next/scripts/tags/epub-reader.js`
 
-Or place it at the blog root: `scripts/tags/epub.js`
+Or place it at the blog root: `scripts/tags/epub-reader.js`
 
 Both locations work; placing it under the theme keeps the plugin bundled with your theme configuration.
 
@@ -27,7 +27,7 @@ Both locations work; placing it under the theme keeps the plugin bundled with yo
 ```markdown
 <div class="epub-grid">
 
-{% epub path="toradora-01.epub" title="とらドラ！" cover="toradora-01.webp" volume="1" date="2006.03.10" %}
+{% epub_reader path="toradora-01.epub" title="とらドラ！" cover="toradora-01.webp" volume="1" date="2006.03.10" %}
 ```
 
 </div>
