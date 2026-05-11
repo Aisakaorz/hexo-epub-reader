@@ -202,6 +202,7 @@ window.HexoEpubReader = {
     tocPanel.classList.remove('active');
     tocList.innerHTML = '';
     this.toc = [];
+    this.currentTocIdx = 0;
     document.getElementById('hexo-epub-tit').textContent = title;
     document.getElementById('hexo-epub-modal').classList.add('active');
 
@@ -268,6 +269,7 @@ window.HexoEpubReader = {
           a.dataset.href = item.href;
           a.onclick = function(e) {
             e.preventDefault();
+            self.currentTocIdx = idx;
             rendition.display(item.href);
             self.highlightToc(idx);
             if (window.innerWidth <= 600) tocPanel.classList.remove('active');
@@ -281,17 +283,28 @@ window.HexoEpubReader = {
 
       // 监听当前位置变化，高亮对应目录
       rendition.on('relocated', function(location) {
-        const current = location.start.cfi;
-        let activeIdx = -1;
-        for (let i = self.toc.length - 1; i >= 0; i--) {
-          if (current && self.toc[i].href) {
-            if (location.start.index >= i) {
-              activeIdx = i;
-              break;
-            }
+        const currentHref = location.start.href;
+        if (!currentHref) return;
+
+        let foundIdx = -1;
+        for (let i = 0; i < self.toc.length; i++) {
+          const tocHref = self.toc[i].href;
+          if (!tocHref) continue;
+
+          // 去掉锚点，只比较文件路径
+          const tocBase = tocHref.split('#')[0];
+          const currBase = currentHref.split('#')[0];
+
+          if (currBase === tocBase || currBase.endsWith(tocBase) || tocBase.endsWith(currBase)) {
+            foundIdx = i;
+            break;
           }
         }
-        if (activeIdx >= 0) self.highlightToc(activeIdx);
+
+        if (foundIdx >= 0 && foundIdx !== self.currentTocIdx) {
+          self.currentTocIdx = foundIdx;
+          self.highlightToc(foundIdx);
+        }
       });
       // ==================================================
 
@@ -377,6 +390,7 @@ window.HexoEpubReader = {
     document.getElementById('hexo-epub-stage').innerHTML = '';
     document.getElementById('hexo-epub-toc-list').innerHTML = '';
     this.toc = [];
+    this.currentTocIdx = 0;
   },
 
   prev: function() { if (this.r && this.r.rendition) this.r.rendition.prev(); },
