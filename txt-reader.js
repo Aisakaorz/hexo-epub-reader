@@ -57,7 +57,8 @@ hexo.extend.tag.register('txt_reader', function(args, content) {
   });
 
   return `
-<div class="txt-grid">${cards}</div>
+<div class="txt-grid desktop-only">${cards}</div>
+<div class="txt-mobile-content mobile-only">${html}</div>
 <div style="display:none;" id="${containerId}">${dataDivs}</div>
   `.trim();
 }, { ends: true });
@@ -165,6 +166,16 @@ const css = `
   #hexo-txt-toc { width: 220px; min-width: 220px; position: absolute; z-index: 20; height: 100%; box-shadow: 2px 0 8px rgba(0,0,0,0.15); }
   .txt-chapter-content { padding: 20px; font-size: 1em; }
   .txt-chapter-content h3 { font-size: 1.5em; margin-bottom: 24px; }
+}
+.txt-mobile-content { display: none; }
+.txt-mobile-content h3 { margin-top: 1.5em; margin-bottom: 0.75em; }
+@media (max-width: 768px) {
+  .txt-grid.desktop-only { display: none !important; }
+  .txt-mobile-content.mobile-only { display: block !important; }
+}
+@media (min-width: 769px) {
+  .txt-grid.desktop-only { display: grid !important; }
+  .txt-mobile-content.mobile-only { display: none !important; }
 }
 </style>
 `;

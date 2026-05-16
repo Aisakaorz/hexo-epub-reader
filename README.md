@@ -42,6 +42,7 @@ scripts/tags/
 - Graceful download fallback when online rendering fails
 - Responsive grid layout
 - Keyboard shortcuts: `←` / `→` to flip pages, `Esc` to close
+- Mobile fallback: hides the card and shows a download-only layout on phones
 
 ### Usage
 
@@ -84,6 +85,7 @@ scripts/tags/
 - Built-in modal reader with TOC sidebar, prev/next chapter navigation
 - Keyboard shortcuts: `←` / `→` to switch chapters, `Esc` to close
 - Responsive grid layout; mobile-friendly TOC drawer
+- Mobile fallback: hides chapter cards and renders the original text directly on phones
 
 ### Usage
 
@@ -114,6 +116,19 @@ content 2
 ### How it works
 
 The plugin renders the inner Markdown first, then splits content by `<h3>` tags. Each `###` heading becomes an independent chapter card. Click `📖 阅读` to open the reader.
+
+---
+
+## Mobile Compatibility
+
+> ⚠️ **Online reading is currently not supported on mobile browsers.**  
+> Due to compatibility limitations of JSZip, EPUB.js, and other libraries on mobile browsers, as well as significant differences in touch interactions compared to desktop, the reader modal cannot function properly on phones.
+
+**Current Fallback Behavior:**
+- **TXT Reader**: On mobile (≤768 px), chapter cards are hidden and the original article text is rendered directly, allowing normal reading.
+- **EPUB Reader**: On mobile, the card is hidden and replaced with a minimal "title + download button" layout. We recommend downloading the file and opening it locally with apps such as WeChat Read, Apple Books, or Moon+ Reader.
+
+For online reading, please visit this site from a desktop browser.
 
 ---
 

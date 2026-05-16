@@ -54,7 +54,7 @@ hexo.extend.tag.register('epub_reader', function(args) {
   const dateLine = date ? `<p class="epub-date">📅 ${date}</p>` : '';
 
   return `
-<div class="epub-card" data-epub-id="${id}" data-epub-path="${pathUrl}" data-epub-title="${title}">
+<div class="epub-card desktop-only" data-epub-id="${id}" data-epub-path="${pathUrl}" data-epub-title="${title}">
   <div class="epub-cover">
     ${badge}
     ${coverUrl ? `<img src="${coverUrl}" alt="${title}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">` : ''}
@@ -67,6 +67,14 @@ hexo.extend.tag.register('epub_reader', function(args) {
       <button class="epub-btn read" onclick="HexoEpubReader.open('${id}')">📖 阅读</button>
       <a class="epub-btn download" href="${pathUrl}" download>⬇️ 下载</a>
     </div>
+  </div>
+</div>
+<div class="epub-mobile mobile-only" style="display:none;">
+  <div class="epub-mobile-inner">
+    <h4 class="epub-mobile-title">${title}</h4>
+    ${date ? `<p class="epub-mobile-date">📅 ${date}</p>` : ''}
+    <p class="epub-mobile-hint">手机端暂不支持在线阅读，请下载后使用本地阅读器打开。</p>
+    <a class="epub-btn read" href="${pathUrl}" download>⬇️ 下载 EPUB</a>
   </div>
 </div>
   `.trim();
@@ -141,6 +149,19 @@ const css = `
   .epub-grid { grid-template-columns: 1fr; } 
   .epub-cover { width: 90px; min-width: 90px; height: 135px; } 
   #hexo-epub-toc { width: 220px; min-width: 220px; position: absolute; z-index: 20; height: 100%; box-shadow: 2px 0 8px rgba(0,0,0,0.15); }
+}
+.epub-mobile { display: none; }
+.epub-mobile-inner { padding: 14px; background: var(--content-bg-color, #fff); border-radius: 10px; border: 1px solid var(--border-color, #eee); margin: 1em 0; }
+.epub-mobile-title { margin: 0 0 8px; font-size: 1.05em; color: var(--text-color, #333); }
+.epub-mobile-date { margin: 0 0 12px; font-size: .85em; color: #999; }
+.epub-mobile-hint { margin: 0 0 12px; font-size: .85em; color: #666; }
+@media (max-width: 768px) {
+  .epub-card.desktop-only { display: none !important; }
+  .epub-mobile.mobile-only { display: block !important; }
+}
+@media (min-width: 769px) {
+  .epub-card.desktop-only { display: flex !important; }
+  .epub-mobile.mobile-only { display: none !important; }
 }
 </style>
 `;
